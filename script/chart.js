@@ -1,4 +1,3 @@
-
 const config = {
     type: 'bar',
     options: {
@@ -20,7 +19,7 @@ const config = {
             tooltip: {
                 enabled: true,
                 displayColors: false,
-                yAlign: top, 
+                yAlign: top,
                 backgroundColor: 'hsl(25, 47%, 15%)',
                 callbacks: {
                     title: function () { },
@@ -40,10 +39,9 @@ const config = {
                     }
                 }
             }
-        }
+        } 
     },
     data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
         datasets: [{
             backgroundColor: ['hsl(10, 79%, 65%)',
                 'hsl(10, 79%, 65%)',
@@ -53,14 +51,13 @@ const config = {
                 'hsl(10, 79%, 65%)',
                 'hsl(10, 79%, 65%)'],
             hoverBackgroundColor: ['hsla(10, 79%, 65%, 0.849)',
-             'hsla(10, 79%, 65%, 0.849)', 
-             'hsl(176, 34%, 60%)', 
-             'hsla(10, 79%, 65%, 0.849)', 
-             'hsla(10, 79%, 65%, 0.849)', 
-             'hsla(10, 79%, 65%, 0.849)', 
-             'hsla(10, 79%, 65%, 0.849)'],
-            borderRadius: 5,
-            data: [17.45, 34.91, 52.36, 31.07, 23.39, 43.28, 25.48],
+                'hsla(10, 79%, 65%, 0.849)',
+                'hsl(176, 34%, 60%)',
+                'hsla(10, 79%, 65%, 0.849)',
+                'hsla(10, 79%, 65%, 0.849)',
+                'hsla(10, 79%, 65%, 0.849)',
+                'hsla(10, 79%, 65%, 0.849)'],
+            borderRadius: 5, 
 
         }]
     },
@@ -70,7 +67,31 @@ const config = {
 const myChart = new Chart(
     document.getElementById('myChart'),
     config
-);
+); 
 
 
+function chartData() {
+    async function expensesData() {
+        const url = './data.json'
+        const res = await fetch(url);
+        const result = await res.json()
+        return result;
+    }
 
+    expensesData().then(result => {
+
+        const days = result.map((day, index) => {
+            return day.day;
+        }) 
+
+        const amount = result.map((amount, index) => {
+            return amount.amount;
+        })
+       
+        myChart.config.data.labels = days
+        myChart.config.data.datasets[0].data = amount 
+        myChart.update() 
+    })
+}
+
+chartData() 

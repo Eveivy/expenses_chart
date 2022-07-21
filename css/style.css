@@ -49,6 +49,7 @@ body {
    color: hsl(27, 66%, 92%);
 }
 .balance p{
+    cursor: pointer;
     font-size: 1.8rem;
     font-weight: bold;
 }
@@ -86,9 +87,11 @@ body {
 .summary .amount{
     font-weight: bold;
     font-size: 2rem;
+    cursor: pointer;
     color: hsl(25, 47%, 15%);
 }
 .last-total{
+    cursor: pointer;
     margin-top: 15px;
 }
 .last-total span{
@@ -97,11 +100,13 @@ body {
     margin-left: 60px;
 }
 .attribution {
-    font-size: 11px;
+    font-size: 20px;
     text-align: center;
+    margin: 10px 0;
 }
 .attribution a {
     color: hsl(228, 45%, 44%);
+    text-decoration: none;
 }
 
 @media screen and (max-width: 780px){
